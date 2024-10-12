@@ -1,0 +1,85 @@
+﻿@model IEnumerable<LawnScheduler.Data.Booking>
+
+@{
+    ViewData["Title"] = "Assigned Bookings";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background color */
+        }
+        .container {
+            margin-top: 50px; /* Add some margin to the top */
+        }
+        h2 {
+            margin-bottom: 30px; /* Spacing below the title */
+        }
+        .table th, .table td {
+            vertical-align: middle; /* Center content vertically */
+        }
+        .btn {
+            margin-right: 10px; /* Spacing between buttons */
+        }
+        .table {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add shadow to the table */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Assigned Bookings</h2>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th>Booking ID</th>
+                <th>Customer Email</th>
+                <th>Machine Name</th>
+                <th>Scheduled Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    <td>@booking.BookingId</td>
+                    <td>@booking.CustomerId</td> <!-- Ideally resolve to Customer Email -->
+                    <td>@booking.Machine.MachineName</td>
+                    <td>@booking.ScheduledDate.ToShortDateString()</td>
+                    <td>@(booking.Status)</td>
+                    <td>
+                        @if (!booking.IsConfirmed)
+                        {
+                            <form asp-action="AcknowledgeBooking" method="post" class="d-inline">
+                                <input type="hidden" name="bookingId" value="@booking.BookingId" />
+                                <button type="submit" class="btn btn-info">Acknowledge Booking</button>
+                            </form>
+                        }
+                        else if (booking.Status == "In Progress")
+                        {
+                            <form asp-action="CompleteBooking" method="post" class="d-inline">
+                                <input type="hidden" name="bookingId" value="@booking.BookingId" />
+                                <button type="submit" class="btn btn-success">Mark as Completed</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

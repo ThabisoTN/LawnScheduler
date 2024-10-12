@@ -1,0 +1,117 @@
+﻿@model IEnumerable<LawnScheduler.Data.Booking>
+<!-- Navigation to All Bookings -->
+<lu>
+    <li class="nav justify-content-center mb-4">
+        <a class="nav-link btn btn-secondary" asp-controller="ConflictManager" asp-action="AllBookings">View All Bookings</a>
+    </li>
+
+</lu>
+<br />
+<br />
+<h2>Conflicting Bookings</h2>
+
+
+    
+
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Booking ID</th>
+            <th>Customer ID</th>
+            <th>Machine ID</th>
+            <th>Scheduled Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var booking in Model)
+        {
+            <tr>
+                <td>@booking.BookingId</td>
+                <td>@booking.CustomerId</td>
+                <td>@booking.MachineId</td>
+                <td>@booking.ScheduledDate.ToShortDateString()</td>
+                <td>
+                    <form asp-action="ResolveConflict" method="post">
+                        <input type="hidden" name="bookingId" value="@booking.BookingId" />
+                        <div class="form-group">
+                            <label for="newMachineId">Select New Machine</label>
+                            <select name="newMachineId" class="form-control" required>
+                                @foreach (var machine in ViewBag.AvailableMachines)
+                                {
+                                    <option value="@machine.MachineId">@machine.MachineName</option>
+                                }
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-warning">Resolve Conflict</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Additional Styling -->
+<style>
+    h2 {
+        margin-bottom: 20px;
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+        color: #333;
+    }
+
+    .table {
+        width: 100%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: #fff;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .table th,
+        .table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #dee2e6;
+        }
+
+        .table th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        .table tbody tr:nth-of-type(odd) {
+            background-color: #f8f9fa; /* Light gray for odd rows */
+        }
+
+        .table tbody tr:hover {
+            background-color: #e9ecef; /* Light gray on hover */
+        }
+
+    .btn-warning {
+        background-color: #ffc107;
+        border: none;
+        color: #fff;
+    }
+
+        .btn-warning:hover {
+            background-color: #e0a800; /* Darker yellow on hover */
+        }
+
+    .form-group {
+        margin-bottom: 0;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    .nav-link {
+        text-decoration: none;
+        color: #fff;
+    }
+</style>

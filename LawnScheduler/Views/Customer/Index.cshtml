@@ -1,0 +1,96 @@
+﻿@model IEnumerable<LawnScheduler.Data.Machine>
+
+<!-- Navigation List Item for My Bookings -->
+<ul class="nav justify-content-center mb-4">
+    <li class="nav-item">
+        <a class="nav-link my-bookings" asp-controller="Customer" asp-action="MyBookings">My Bookings</a>
+    </li>
+</ul>
+
+<h2 class="text-center">Available Machines</h2>
+
+<div class="container">
+    <div class="row">
+        @foreach (var machine in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@machine.MachineName</h5>
+                        <p class="card-text">@machine.Description</p>
+                        <form asp-action="BookMachine" method="post">
+                            <input type="hidden" name="machineId" value="@machine.MachineId" />
+                            <div class="form-group">
+                                <label for="scheduledDate">Booking Date:</label>
+                                <input type="date" name="scheduledDate" class="form-control" required />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Book</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    /* Navigation Item Styling */
+    .nav {
+        background-color: #f8f9fa; /* Light background for contrast */
+        padding: 10px; /* Padding around the nav */
+        border-radius: 0.5rem; /* Rounded corners */
+        margin-bottom: 20px; /* Space below the nav */
+    }
+
+    .nav-link {
+        color: #007bff; 
+        font-weight: bold; 
+        font-size: 1.1rem; 
+        transition: color 0.3s; 
+    }
+
+        .nav-link:hover {
+            color: #0056b3; 
+            text-decoration: underline; 
+        }
+
+    h2 {
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Card Styles */
+    .card {
+        border-radius: 0.5rem;
+        background-color: #ffffff;
+        transition: transform 0.2s;
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+    .card-title {
+        font-weight: bold;
+        font-size: 1.25rem;
+        margin-bottom: 10px;
+        color: #007bff;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+        color: #555;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 10px 15px;
+        border-radius: 5px;
+        color: white;
+        font-size: 0.9rem;
+    }
+</style>
