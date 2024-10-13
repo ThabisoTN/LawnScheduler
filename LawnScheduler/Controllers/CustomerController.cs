@@ -15,6 +15,7 @@ namespace LawnScheduler.Controllers
         private readonly IBookingService _bookingService;
         private readonly UserManager<IdentityUser> _userManager; 
 
+
         public CustomerController(CustomDbContext context, IBookingService bookingService, UserManager<IdentityUser> userManager)
         {
             _context = context;
@@ -56,15 +57,25 @@ namespace LawnScheduler.Controllers
 
 
         // New method to get all bookings for the customer
+        // New method to get all bookings for the customer
         public async Task<IActionResult> MyBookings()
         {
             var userId = _userManager.GetUserId(User);
             var bookings = await _context.Bookings
-                .Include(b => b.Machine) 
-                .Where(b => b.CustomerId == userId) 
+                .Include(b => b.Machine) // Include machine details
+                .Where(b => b.CustomerId == userId)
                 .ToListAsync();
+
+            // Retrieve operator emails and add to the bookings
+            var operatorIds = bookings.Select(b => b.Machine.OperatorId).Distinct().ToList();
+            var operators = await _userManager.Users
+                .Where(u => operatorIds.Contains(u.Id))
+                .ToDictionaryAsync(u => u.Id, u => u.Email);
+
+            ViewBag.OperatorEmails = operators; // Store operator emails in ViewBag
 
             return View(bookings);
         }
+
     }
 }

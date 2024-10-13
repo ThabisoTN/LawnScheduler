@@ -123,8 +123,7 @@ namespace LawnScheduler.Services
             }
 
             
-            var isMachineAvailable = !await _context.Bookings
-                .AnyAsync(b => b.MachineId == newMachineId && b.ScheduledDate.Date == existingBooking.ScheduledDate.Date);
+            var isMachineAvailable = !await _context.Bookings.AnyAsync(b => b.MachineId == newMachineId && b.ScheduledDate.Date == existingBooking.ScheduledDate.Date);
 
             if (!isMachineAvailable)
             {

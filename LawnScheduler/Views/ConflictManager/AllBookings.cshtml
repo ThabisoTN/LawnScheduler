@@ -6,11 +6,11 @@
     <thead>
         <tr>
             <th>Booking ID</th>
-            <th>Customer Email</th>
-            <th>Machine Name</th>
+            <th>Customer Email</th> <!-- Column for Customer Email -->
+            <th>Machine Name</th> <!-- Updated column to display Machine Name -->
             <th>Scheduled Date</th>
             <th>Status</th>
-        
+          
         </tr>
     </thead>
     <tbody>
@@ -18,8 +18,8 @@
         {
             <tr>
                 <td>@booking.BookingId</td>
-                <td>@ViewBag.CustomerEmails[booking.CustomerId]</td> <!-- Resolving to Customer Email -->
-                <td>@booking.Machine.MachineName</td>
+                <td>@ViewBag.CustomerEmails[booking.CustomerId]</td> <!-- Display Customer Email -->
+                <td>@booking.Machine.MachineName</td> <!-- Display Machine Name -->
                 <td>@booking.ScheduledDate.ToShortDateString()</td>
                 <td>@(booking.Status)</td>
                 <td>
@@ -63,26 +63,26 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
-    .table th,
-    .table td {
-        padding: 15px;
-        text-align: left;
-        border: 1px solid #dee2e6;
-    }
+        .table th,
+        .table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #dee2e6;
+        }
 
-    .table th {
-        background-color: #007bff;
-        color: white;
-        font-weight: bold;
-    }
+        .table th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
 
-    .table tbody tr:nth-of-type(odd) {
-        background-color: #f8f9fa; /* Light gray for odd rows */
-    }
+        .table tbody tr:nth-of-type(odd) {
+            background-color: #f8f9fa; /* Light gray for odd rows */
+        }
 
-    .table tbody tr:hover {
-        background-color: #e9ecef; /* Light gray on hover */
-    }
+        .table tbody tr:hover {
+            background-color: #e9ecef; /* Light gray on hover */
+        }
 
     .btn-info {
         background-color: #17a2b8;
@@ -90,9 +90,9 @@
         color: #fff;
     }
 
-    .btn-info:hover {
-        background-color: #138496; /* Darker blue on hover */
-    }
+        .btn-info:hover {
+            background-color: #138496; /* Darker blue on hover */
+        }
 
     .form-group {
         margin-bottom: 0;

@@ -9,6 +9,7 @@
             <th>Machine Name</th>
             <th>Scheduled Date</th>
             <th>Status</th>
+            <th>Operator Email</th> <!-- New column for Operator Email -->
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,7 @@
                 <td>@booking.Machine.MachineName</td>
                 <td>@booking.ScheduledDate.ToShortDateString()</td>
                 <td>@(booking.Status)</td>
+                <td>@ViewBag.OperatorEmails[booking.Machine.OperatorId]</td> <!-- Display Operator Email -->
             </tr>
         }
     </tbody>
@@ -42,24 +44,24 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
-    .table th,
-    .table td {
-        padding: 15px;
-        text-align: left;
-        border: 1px solid #dee2e6;
-    }
+        .table th,
+        .table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #dee2e6;
+        }
 
-    .table th {
-        background-color: #007bff;
-        color: white;
-        font-weight: bold;
-    }
+        .table th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
 
-    .table tbody tr:nth-of-type(odd) {
-        background-color: #f8f9fa; /* Light gray for odd rows */
-    }
+        .table tbody tr:nth-of-type(odd) {
+            background-color: #f8f9fa; /* Light gray for odd rows */
+        }
 
-    .table tbody tr:hover {
-        background-color: #e9ecef; /* Light gray on hover */
-    }
+        .table tbody tr:hover {
+            background-color: #e9ecef; /* Light gray on hover */
+        }
 </style>

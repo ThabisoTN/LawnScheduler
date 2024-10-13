@@ -40,7 +40,7 @@ namespace LawnScheduler.Controllers
         public async Task<IActionResult> AllBookings()
         {
             var allBookings = await _context.Bookings
-                .Include(b => b.Machine) // Include machine details if needed
+                .Include(b => b.Machine)
                 .ToListAsync();
 
             var customerEmails = await _applicationContext.Users
