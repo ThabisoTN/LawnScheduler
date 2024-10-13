@@ -11,14 +11,16 @@ namespace LawnScheduler.Controllers
     {
         private readonly CustomDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly ApplicationDbContext _applicationContext; // Define the ApplicationDbContext
+        private readonly ApplicationDbContext _applicationContext; 
 
         public MachineOperatorController(CustomDbContext context, UserManager<IdentityUser> userManager, ApplicationDbContext applicationContext) // Update constructor
         {
             _context = context;
             _userManager = userManager;
-            _applicationContext = applicationContext; // Assign ApplicationDbContext
+            _applicationContext = applicationContext; 
         }
+
+
 
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -26,15 +28,16 @@ namespace LawnScheduler.Controllers
             var userId = _userManager.GetUserId(User);
             var bookings = await _context.Bookings.Include(b => b.Machine).Where(b => b.Machine.OperatorId == userId).ToListAsync();
 
-            // Fetch customer emails
-            var customerEmails = await _applicationContext.Users
-                .Where(u => bookings.Select(b => b.CustomerId).Contains(u.Id))
-                .ToDictionaryAsync(u => u.Id, u => u.Email);
+            
+            var customerEmails = await _applicationContext.Users.Where(u => bookings.Select(b => b.CustomerId).Contains(u.Id)).ToDictionaryAsync(u => u.Id, u => u.Email);
 
             ViewBag.CustomerEmails = customerEmails;
 
             return View(bookings);
         }
+
+
+
 
         // Acknowledging post method
         [HttpPost]
@@ -50,6 +53,10 @@ namespace LawnScheduler.Controllers
 
             return RedirectToAction("Index");
         }
+
+
+
+
 
         // Setting done with work for the booking. 
         [HttpPost]

@@ -25,9 +25,7 @@ namespace LawnScheduler.Services
                 if (machine != null)
                 {
             
-                    var existingBookings = await _context.Bookings
-                        .Where(b => b.MachineId == machineId && b.ScheduledDate.Date == scheduledDate.Date)
-                        .ToListAsync();
+                    var existingBookings = await _context.Bookings.Where(b => b.MachineId == machineId && b.ScheduledDate.Date == scheduledDate.Date).ToListAsync();
 
                     
                     if (existingBookings.Any())
@@ -105,9 +103,7 @@ namespace LawnScheduler.Services
         //Retrieving bookings
         public async Task<List<Booking>> GetConflictingBookingsAsync()
         {
-            return await _context.Bookings
-                .Where(b => b.IsConflict)
-                .ToListAsync();
+            return await _context.Bookings.Where(b => b.IsConflict).ToListAsync();
         }
 
 

@@ -45,7 +45,7 @@ public class DbInitializer
         var users = new[]
         {
             // Conflict Manager
-            new { Email = "conflictmanager@gmail.com", Role = "Conflict Manager", Password = "@Thabiso111" },
+            new { Email = "conflictmanager@gmail.com", Role = "Conflict Manager", Password = "@Thabiso111"},
             
             // Machine Operators
             new { Email = "operator1@gmail.com", Role = "Machine Operator", Password = "@Thabiso111" },

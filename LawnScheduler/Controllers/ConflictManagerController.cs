@@ -20,14 +20,14 @@ namespace LawnScheduler.Controllers
             _applicationContext = applicationContext; 
         }
 
+
+
         // View conflicting bookings
         public async Task<IActionResult> Index()
         {
             var conflictingBookings = await _bookingService.GetConflictingBookingsAsync();
 
-            var customerEmails = await _applicationContext.Users
-                .Where(u => conflictingBookings.Select(b => b.CustomerId).Contains(u.Id))
-                .ToDictionaryAsync(u => u.Id, u => u.Email);
+            var customerEmails = await _applicationContext.Users.Where(u => conflictingBookings.Select(b => b.CustomerId).Contains(u.Id)).ToDictionaryAsync(u => u.Id, u => u.Email);
 
             ViewBag.AvailableMachines = await _context.Machines.ToListAsync();
             ViewBag.CustomerEmails = customerEmails;
@@ -36,21 +36,21 @@ namespace LawnScheduler.Controllers
         }
 
 
-        //getting all bookings
+
+
+        //Getting all bookings
         public async Task<IActionResult> AllBookings()
         {
-            var allBookings = await _context.Bookings
-                .Include(b => b.Machine)
-                .ToListAsync();
+            var allBookings = await _context.Bookings.Include(b => b.Machine).ToListAsync();
 
-            var customerEmails = await _applicationContext.Users
-                .Where(u => allBookings.Select(b => b.CustomerId).Contains(u.Id))
-                .ToDictionaryAsync(u => u.Id, u => u.Email);
+            var customerEmails = await _applicationContext.Users.Where(u => allBookings.Select(b => b.CustomerId).Contains(u.Id)).ToDictionaryAsync(u => u.Id, u => u.Email);
 
             ViewBag.CustomerEmails = customerEmails;
 
             return View(allBookings);
         }
+
+
 
 
         // Resolve a conflict post method

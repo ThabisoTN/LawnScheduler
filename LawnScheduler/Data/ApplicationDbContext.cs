@@ -12,9 +12,4 @@ namespace LawnScheduler.Data
         }
     }
 
-
-
-
-
-
 }
