@@ -45,10 +45,14 @@ namespace LawnScheduler.Controllers
             return RedirectToAction("BookingConfirmation");
         }
 
+
+        //get booking confirmation 
         public IActionResult BookingConfirmation()
         {
             return View();
         }
+
+        //get  booking conflict 
 
         public IActionResult BookingConflict()
         {
@@ -56,16 +60,13 @@ namespace LawnScheduler.Controllers
         }
 
 
+
+
         // Method to get all bookings for the customer
         public async Task<IActionResult> MyBookings()
         {
             var userId = _userManager.GetUserId(User);
-            var bookings = await _context.Bookings
-                .Include(b => b.Machine)
-                .Where(b => b.CustomerId == userId)
-                .ToListAsync();
-
-           
+            var bookings = await _context.Bookings.Include(b => b.Machine).Where(b => b.CustomerId == userId).ToListAsync();
             var operatorIds = bookings.Select(b => b.Machine.OperatorId).Distinct().ToList();
             var operators = await _userManager.Users.Where(u => operatorIds.Contains(u.Id)).ToDictionaryAsync(u => u.Id, u => u.Email);
 

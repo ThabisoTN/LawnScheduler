@@ -22,15 +22,11 @@ body {
 }
 
 
-
-/* site.css */
-
-/* Navigation Item Styling */
 .nav {
     background-color: #f8f9fa; /* Light background for contrast */
     padding: 10px; /* Padding around the nav */
     border-radius: 0.5rem; /* Rounded corners */
-    margin-bottom: 20px; /* Space below the nav */
+    margin-bottom: 20px; /
 }
 
 .nav-link {
@@ -51,7 +47,7 @@ h2 {
     color: #333;
 }
 
-/* Card Styles */
+
 .card {
     border-radius: 0.5rem;
     background-color: #ffffff;
@@ -87,9 +83,6 @@ h2 {
 
 
 
-/* site.css */
-
-/* Conflict Container Styling */
 .conflict-container {
     max-width: 600px;
     margin: 50px auto;
@@ -97,8 +90,8 @@ h2 {
     padding: 30px;
     border: 1px solid #dee2e6;
     border-radius: 8px;
-    background-color: #f8d7da; /* Light red background */
-    color: #721c24; /* Dark red text */
+    background-color: #f8d7da; 
+    color: #721c24; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -125,9 +118,7 @@ h2 {
     }
 
 
-/* site.css */
 
-/* Confirmation Container Styling */
 .confirmation-container {
     max-width: 600px;
     margin: 50px auto;
@@ -164,10 +155,6 @@ h2 {
     }
 
 
-
-/* site.css */
-
-/* Heading Style */
 h2 {
     margin-bottom: 20px;
     font-size: 2rem;
@@ -176,7 +163,7 @@ h2 {
     color: #333;
 }
 
-/* Table Styling */
+
 .table {
     width: 100%;
     margin: 20px auto;
@@ -200,14 +187,14 @@ h2 {
     }
 
     .table tbody tr:nth-of-type(odd) {
-        background-color: #f8f9fa; /* Light gray for odd rows */
+        background-color: #f8f9fa; 
     }
 
     .table tbody tr:hover {
-        background-color: #e9ecef; /* Light gray on hover */
+        background-color: #e9ecef; 
     }
 
-/* Button Styling */
+
 .btn-warning {
     background-color: #ffc107;
     border: none;
@@ -215,10 +202,9 @@ h2 {
 }
 
     .btn-warning:hover {
-        background-color: #e0a800; /* Darker yellow on hover */
+        background-color: #e0a800; 
     }
 
-/* Form Group Styling */
 .form-group {
     margin-bottom: 0;
 }
@@ -227,17 +213,13 @@ label {
     font-weight: bold;
 }
 
-/* Navigation Link Styling */
+
 .nav-link {
     text-decoration: none;
     color: #fff;
 }
 
 
-
-/* site.css */
-
-/* Heading Style */
 h2 {
     margin-bottom: 20px;
     font-size: 2rem;
@@ -246,7 +228,7 @@ h2 {
     color: #333;
 }
 
-/* Table Styling */
+
 .table {
     width: 100%;
     margin: 20px auto;
@@ -270,14 +252,14 @@ h2 {
     }
 
     .table tbody tr:nth-of-type(odd) {
-        background-color: #f8f9fa; /* Light gray for odd rows */
+        background-color: #f8f9fa; 
     }
 
     .table tbody tr:hover {
-        background-color: #e9ecef; /* Light gray on hover */
+        background-color: #e9ecef; 
     }
 
-/* Button Info Styling */
+
 .btn-info {
     background-color: #17a2b8;
     border: none;
@@ -285,10 +267,10 @@ h2 {
 }
 
     .btn-info:hover {
-        background-color: #138496; /* Darker blue on hover */
+        background-color: #138496; 
     }
 
-/* Form Group Styling */
+
 .form-group {
     margin-bottom: 0;
     display: inline-block;
@@ -299,36 +281,30 @@ label {
     font-weight: bold;
 }
 
-
-
-/* site.css */
-
-/* Body Style */
 body {
-    background-color: #f8f9fa; /* Light background color */
+    background-color: #f8f9fa; 
 }
 
-/* Container Style */
+
 .container {
-    margin-top: 50px; /* Add some margin to the top */
+    margin-top: 50px; 
 }
 
-/* Heading Style */
 h2 {
-    margin-bottom: 30px; /* Spacing below the title */
+    margin-bottom: 30px; 
 }
 
-/* Table Cell Alignment */
+
 .table th, .table td {
-    vertical-align: middle; /* Center content vertically */
+    vertical-align: middle; 
 }
 
-/* Button Spacing */
+
 .btn {
-    margin-right: 10px; /* Spacing between buttons */
+    margin-right: 10px; /
 }
 
-/* Table Shadow */
+
 .table {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow to the table */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }

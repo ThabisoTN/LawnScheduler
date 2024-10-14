@@ -100,7 +100,7 @@ namespace LawnScheduler.Services
         }
 
 
-        //Retrieving bookings
+        //Retrieving conflicting bookings
         public async Task<List<Booking>> GetConflictingBookingsAsync()
         {
             return await _context.Bookings.Where(b => b.IsConflict).ToListAsync();

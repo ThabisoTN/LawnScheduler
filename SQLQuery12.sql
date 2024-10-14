@@ -1,0 +1,4 @@
+﻿ALTER TABLE IdentityUser
+ADD FirstName NVARCHAR(100) NULL,
+    LastName NVARCHAR(100) NULL,
+    Address NVARCHAR(255) NULL;

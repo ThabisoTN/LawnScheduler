@@ -45,7 +45,7 @@
                                     <button type="submit" class="btn btn-info">Acknowledge Booking</button>
                                 </form>
                             }
-                            else if (booking.Status == "In Progress")
+                            else if (booking.Status == "Booking Acknowledged")
                             {
                                 <form asp-action="CompleteBooking" method="post" class="d-inline">
                                     <input type="hidden" name="bookingId" value="@booking.BookingId" />

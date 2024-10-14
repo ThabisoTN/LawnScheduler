@@ -21,16 +21,13 @@ namespace LawnScheduler.Controllers
         }
 
 
-
+        //get all bookings 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var userId = _userManager.GetUserId(User);
             var bookings = await _context.Bookings.Include(b => b.Machine).Where(b => b.Machine.OperatorId == userId).ToListAsync();
-
-            
             var customerEmails = await _applicationContext.Users.Where(u => bookings.Select(b => b.CustomerId).Contains(u.Id)).ToDictionaryAsync(u => u.Id, u => u.Email);
-
             ViewBag.CustomerEmails = customerEmails;
 
             return View(bookings);
@@ -47,7 +44,7 @@ namespace LawnScheduler.Controllers
             if (booking != null && !booking.IsConfirmed)
             {
                 booking.IsConfirmed = true;
-                booking.Status = "In Progress";
+                booking.Status = "Booking Acknowledged";
                 await _context.SaveChangesAsync();
             }
 
@@ -58,14 +55,14 @@ namespace LawnScheduler.Controllers
 
 
 
-        // Setting done with work for the booking. 
+        // updating work progress. 
         [HttpPost]
         public async Task<IActionResult> CompleteBooking(int bookingId)
         {
             var booking = await _context.Bookings.FindAsync(bookingId);
             if (booking != null && booking.IsConfirmed)
             {
-                booking.Status = "Completed";
+                booking.Status = "Work Completed";
                 booking.CompletionDate = DateTime.Now;
                 await _context.SaveChangesAsync();
             }

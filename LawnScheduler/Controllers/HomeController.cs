@@ -9,18 +9,18 @@ namespace LawnScheduler.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly CustomDbContext _context; // Add this line
+        private readonly CustomDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger, CustomDbContext context) // Add context parameter
+        public HomeController(ILogger<HomeController> logger, CustomDbContext context) 
         {
             _logger = logger;
-            _context = context; // Assign the context to the field
+            _context = context; 
         }
 
         public IActionResult Index()
         {
-            var machines = _context.Machines.ToList(); // Fetching machines from the database
-            return View(machines); // Pass machines to the view
+            var machines = _context.Machines.ToList();
+            return View(machines); 
         }
 
         public IActionResult Privacy()
