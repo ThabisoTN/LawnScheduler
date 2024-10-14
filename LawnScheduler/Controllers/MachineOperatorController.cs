@@ -26,12 +26,14 @@ namespace LawnScheduler.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = _userManager.GetUserId(User);
-            var bookings = await _context.Bookings.Include(b => b.Machine).Where(b => b.Machine.OperatorId == userId).ToListAsync();
+            var bookings = await _context.Bookings.Include(b => b.Machine).Where(b => b.Machine.OperatorId == userId && !b.IsConflict).ToListAsync();
             var customerEmails = await _applicationContext.Users.Where(u => bookings.Select(b => b.CustomerId).Contains(u.Id)).ToDictionaryAsync(u => u.Id, u => u.Email);
+
             ViewBag.CustomerEmails = customerEmails;
 
             return View(bookings);
         }
+
 
 
 

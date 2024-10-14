@@ -117,7 +117,7 @@ public class DbInitializer
         new Machine { MachineName = "Edger", Model = "BLACK+DECKER LST400", Description = "Cordless electric edger", OperatorId = operators[5].Id }
     };
 
-        customContext.Machines.AddRange(machines);  // Add machines to CustomDbContext
+        customContext.Machines.AddRange(machines); 
         await customContext.SaveChangesAsync();
     }
 
