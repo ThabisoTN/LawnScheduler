@@ -33,60 +33,7 @@ public class DbInitializer
         }
     }
 
-
-
-    //method to seed users
-    //method to seed users
-    //public static async Task SeedUsers(IServiceProvider serviceProvider)
-    //{
-    //    var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
-    //    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-    //    var users = new[]
-    //    {
-    //    // Conflict Manager
-    //    new { Email = "conflictmanager@gmail.com", UserName = "ConflictManager", Role = "Conflict Manager", Password = "@Thabiso111" },
-
-    //    // Machine Operators
-    //    new { Email = "operator1@gmail.com", UserName = "Operator1", Role = "Machine Operator", Password = "@Thabiso111" },
-    //    new { Email = "operator2@gmail.com", UserName = "Operator2", Role = "Machine Operator", Password = "@Thabiso111" },
-    //    new { Email = "operator3@gmail.com", UserName = "Operator3", Role = "Machine Operator", Password = "@Thabiso111" },
-    //    new { Email = "operator4@gmail.com", UserName = "Operator4", Role = "Machine Operator", Password = "@Thabiso111" },
-    //    new { Email = "operator5@gmail.com", UserName = "Operator5", Role = "Machine Operator", Password = "@Thabiso111" },
-    //    new { Email = "operator6@gmail.com", UserName = "Operator6", Role = "Machine Operator", Password = "@Thabiso111" },
-
-    //    // Customers
-    //    new { Email = "customer1@gmail.com", UserName = "Customer1", Role = "Customer", Password = "@Thabiso111" },
-    //    new { Email = "customer2@gmail.com", UserName = "Customer2", Role = "Customer", Password = "@Thabiso111" }
-    //};
-
-    //    foreach (var userInfo in users)
-    //    {
-    //        var user = await userManager.FindByEmailAsync(userInfo.Email);
-    //        if (user == null)
-    //        {
-    //            user = new IdentityUser
-    //            {
-    //                UserName = userInfo.UserName,
-    //                Email = userInfo.Email
-    //            };
-
-    //            var result = await userManager.CreateAsync(user, userInfo.Password);
-
-    //            if (result.Succeeded)
-    //            {
-    //                user.EmailConfirmed = true;
-    //                await userManager.UpdateAsync(user);
-
-    //                if (await roleManager.RoleExistsAsync(userInfo.Role))
-    //                {
-    //                    await userManager.AddToRoleAsync(user, userInfo.Role);
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
-
+    //Seed users method
 
     public static async Task SeedUsers(IServiceProvider serviceProvider)
     {
