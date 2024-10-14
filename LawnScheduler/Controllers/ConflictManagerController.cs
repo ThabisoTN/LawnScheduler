@@ -41,14 +41,14 @@ namespace LawnScheduler.Controllers
         //Getting all bookings
         public async Task<IActionResult> AllBookings()
         {
-            var allBookings = await _context.Bookings.Include(b => b.Machine).ToListAsync();
-
+            var allBookings = await _context.Bookings.Include(b => b.Machine).Where(b => !b.IsConflict).ToListAsync();
             var customerEmails = await _applicationContext.Users.Where(u => allBookings.Select(b => b.CustomerId).Contains(u.Id)).ToDictionaryAsync(u => u.Id, u => u.Email);
 
             ViewBag.CustomerEmails = customerEmails;
 
             return View(allBookings);
         }
+
 
 
 
