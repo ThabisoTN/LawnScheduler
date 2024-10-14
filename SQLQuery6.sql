@@ -1,2 +1,0 @@
-﻿ALTER TABLE Bookings
-ADD Status NVARCHAR(50) NOT NULL DEFAULT 'In Progress';
