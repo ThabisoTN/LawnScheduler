@@ -53,4 +53,4 @@ jobs:
           app-name: 'LawnMowingBookingApp'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_02A9A9717C5B4D51AC89592F0D5BEA0C }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_61ED4753DC4E4509A03335576A6C72DB }}
