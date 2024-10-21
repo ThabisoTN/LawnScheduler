@@ -53,4 +53,4 @@ Operator Actions: Log in as an operator and check the bookings assigned to them,
 Conflict Manager Actions: Log in as the conflict manager to resolve any conflicts that may arise.
 
 
-Lawn Scheduler provides a user-friendly interface for managing lawn care equipment bookings. By following the above steps and using the provided credentials, you can test the application's core functionalities.
+Lawn Scheduler provides a user-friendly interface for managing lawn care equipment bookings. By following the above steps and using the provided credentials, you can test the application's core functionalities.11
