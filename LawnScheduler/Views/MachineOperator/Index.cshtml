@@ -11,6 +11,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        /* Header Styling */
+        h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            color: #264653;
+            margin: 20px 0;
+        }
+
+        /* Table Styling */
+        .table {
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .table th {
+            background-color: #2a9d8f;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        /* Button Styling */
+        .btn-info {
+            background-color: #007bff;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-info:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+       
+    </style>
 </head>
 <body>
 
@@ -18,14 +70,14 @@
         <h2>Assigned Bookings</h2>
 
         <table class="table table-bordered table-striped">
-            <thead class="thead-light">
+            <thead>
                 <tr>
                     <th>Booking ID</th>
-                    <th>Customer Email that made booking</th> <!-- Email of the customer -->
+                    <th>Customer Email</th>
                     <th>Machine Name</th>
                     <th>Scheduled Date</th>
                     <th>Status</th>
-                    <th>Actions</th> <!-- Actions for the operator -->
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,23 +85,23 @@
                 {
                     <tr>
                         <td>@booking.BookingId</td>
-                        <td>@ViewBag.CustomerEmails[booking.CustomerId]</td> <!-- Display customer email -->
+                        <td>@ViewBag.CustomerEmails[booking.CustomerId]</td>
                         <td>@booking.Machine.MachineName</td>
                         <td>@booking.ScheduledDate.ToShortDateString()</td>
-                        <td>@(booking.Status)</td>
+                        <td>@booking.Status</td>
                         <td>
                             @if (!booking.IsConfirmed)
                             {
                                 <form asp-action="AcknowledgeBooking" method="post" class="d-inline">
                                     <input type="hidden" name="bookingId" value="@booking.BookingId" />
-                                    <button type="submit" class="btn btn-info">Acknowledge Booking</button>
+                                    <button type="submit" class="btn btn-info btn-sm">Acknowledge</button>
                                 </form>
                             }
                             else if (booking.Status == "Booking Acknowledged")
                             {
                                 <form asp-action="CompleteBooking" method="post" class="d-inline">
                                     <input type="hidden" name="bookingId" value="@booking.BookingId" />
-                                    <button type="submit" class="btn btn-success">Mark as Completed</button>
+                                    <button type="submit" class="btn btn-success btn-sm">Complete</button>
                                 </form>
                             }
                         </td>

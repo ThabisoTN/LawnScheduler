@@ -1,47 +1,97 @@
 ﻿@model IEnumerable<LawnScheduler.Data.Booking>
 
 <!-- Navigation to All Bookings -->
-<ul>
-    <li class="nav justify-content-center mb-4">
-        <a class="nav-link btn btn-secondary" asp-controller="ConflictManager" asp-action="AllBookings">View All Bookings</a>
-    </li>
-</ul>
-<h2>Conflicting Bookings</h2>
+<div class="container my-4 text-center">
+    <a class="btn btn-secondary" asp-controller="ConflictManager" asp-action="AllBookings">View All Bookings</a>
+</div>
 
-<table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>Booking ID</th>
-            <th>Customer Email that made booking</th>
-            <th>Machine Name</th>
-            <th>Scheduled Date</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var booking in Model)
-        {
+<h2 class="text-center mb-4">Conflicting Bookings</h2>
+
+<div class="container">
+    <table class="table table-striped table-bordered shadow-sm">
+        <thead class="thead-dark">
             <tr>
-                <td>@booking.BookingId</td>
-                <td>@ViewBag.CustomerEmails[booking.CustomerId]</td>
-                <td>@booking.Machine.MachineName</td>
-                <td>@booking.ScheduledDate.ToShortDateString()</td>
-                <td>
-                    <form asp-action="ResolveConflict" method="post">
-                        <input type="hidden" name="bookingId" value="@booking.BookingId" />
-                        <div class="form-group">
-                            <label for="newMachineId">Select New Machine</label>
-                            <select name="newMachineId" class="form-control" required>
-                                @foreach (var machine in ViewBag.AvailableMachines)
-                                {
-                                    <option value="@machine.MachineId">@machine.MachineName</option>
-                                }
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-warning">Resolve Conflict</button>
-                    </form>
-                </td>
+                <th>Booking ID</th>
+                <th>Customer Email</th>
+                <th>Machine Name</th>
+                <th>Scheduled Date</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    <td>@booking.BookingId</td>
+                    <td>@ViewBag.CustomerEmails[booking.CustomerId]</td>
+                    <td>@booking.Machine.MachineName</td>
+                    <td>@booking.ScheduledDate.ToShortDateString()</td>
+                    <td>
+                        <form asp-action="ResolveConflict" method="post">
+                            <input type="hidden" name="bookingId" value="@booking.BookingId" />
+                            <div class="form-group mb-2">
+                                <label for="newMachineId" class="form-label">Select New Machine</label>
+                                <select name="newMachineId" class="form-control" required>
+                                    @foreach (var machine in ViewBag.AvailableMachines)
+                                    {
+                                        <option value="@machine.MachineId">@machine.MachineName</option>
+                                    }
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-warning w-100">Resolve Conflict</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    /* Header Styling */
+    h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #264653;
+    }
+
+    /* Table Styling */
+    .table {
+        width: 100%;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .table th {
+        background-color: #2a9d8f;
+        color: white;
+        text-align: center;
+    }
+
+    .table td {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    /* Button Styling */
+    .btn-warning {
+        background-color: #ffc107;
+        border: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-warning:hover {
+        background-color: #e0a800;
+    }
+
+    .btn-secondary {
+        color: white;
+        background-color: #6c757d;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+</style>

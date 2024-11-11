@@ -66,7 +66,9 @@ namespace LawnScheduler.Controllers
         public async Task<IActionResult> MyBookings()
         {
             var userId = _userManager.GetUserId(User);
-            var bookings = await _context.Bookings.Include(b => b.Machine).Where(b => b.CustomerId == userId).ToListAsync();
+            var bookings = await _context.Bookings
+                .Include(b => b.Machine)
+                .Where(b => b.CustomerId == userId).ToListAsync();
             var operatorIds = bookings.Select(b => b.Machine.OperatorId).Distinct().ToList();
             var operators = await _userManager.Users.Where(u => operatorIds.Contains(u.Id)).ToDictionaryAsync(u => u.Id, u => u.Email);
 

@@ -10,28 +10,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        /* Custom styles */
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        h1.display-4 {
+            font-weight: 700;
+            color: #2a9d8f;
+        }
+        .lead {
+            color: #555;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .card-title {
+            color: #264653;
+            font-weight: 600;
+        }
+        .card-text {
+            color: #555;
+        }
+        .book-button {
+            background-color: #2a9d8f;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+        .book-button:hover {
+            background-color: #21867a;
+        }
+        footer {
+            background-color: #264653;
+            color: #fff;
+            padding: 1rem 0;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-
-
+    <!-- Header Section -->
     <div class="container text-center mt-5">
         <h1 class="display-4">Welcome to LawnScheduler</h1>
         <p class="lead">Manage your machine bookings effortlessly.</p>
     </div>
 
+    <!-- Available Machines Section -->
     <div class="container mt-5">
-        <h2 class="text-center">Available Machines for Booking</h2>
+        <h2 class="text-center mb-4">Available Machines for Booking</h2>
         <div class="row">
             @foreach (var machine in Model)
             {
-                <div class="col-md-4 mb-4">
-                    <div class="card">
+                <div class="col-md-6 col-lg-4 mb-4 d-flex align-items-stretch">
+                    <div class="card w-100">
                         <div class="card-body">
                             <h5 class="card-title">@machine.MachineName</h5>
                             <p class="card-text">@machine.Description</p>
                             <label>Booking Date:</label>
-                            <input type="date" class="form-control mb-2" placeholder="yyyy-mm-dd" />
-                            <button class="btn btn-primary book-button" data-toggle="modal" data-target="#loginModal">Book Now</button>
+                            <input type="date" class="form-control mb-3" placeholder="yyyy-mm-dd" />
+                            <button class="btn btn-primary book-button w-100" data-toggle="modal" data-target="#loginModal">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -39,31 +84,32 @@
         </div>
     </div>
 
-    <<!-- Modal -->
+    <!-- Login Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel">Login Required or Register as customer then login</h5>
+                    <h5 class="modal-title" id="loginModalLabel">Login Required</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <p>Please log in to book a machine.</p>
+                <div class="modal-body text-center">
+                    <p class="mb-4">Please log in to book a machine.</p>
                     <a href="https://localhost:7142/Identity/Account/Login" class="btn btn-primary">Login</a>
                 </div>
             </div>
         </div>
     </div>
 
-
-    <footer class="text-center mt-5 mb-3">
+    <!-- Footer Section -->
+    <footer class="text-center mt-5">
         <div class="container">
             <p>&copy; 2024 LawnScheduler. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

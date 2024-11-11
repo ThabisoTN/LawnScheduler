@@ -6,13 +6,13 @@
 }
 
 <h1 class="text-center mt-4">@ViewData["Title"]</h1>
+
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-4">
-            <section class="border p-4 rounded shadow-sm">
+        <div class="col-md-6 col-lg-4">
+            <section class="border p-4 rounded shadow login-section">
                 <form id="account" method="post">
-                    <hr />
-                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger text-center mb-3" role="alert"></div>
 
                     <div class="form-floating mb-3">
                         <input asp-for="Input.Email" class="form-control" autocomplete="username" placeholder="name@example.com" required />
@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input asp-for="Input.Password" class="form-control" autocomplete="current-password" placeholder="password" required />
+                        <input asp-for="Input.Password" type="password" class="form-control" autocomplete="current-password" placeholder="password" required />
                         <label asp-for="Input.Password" class="form-label">Password</label>
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
@@ -31,20 +31,16 @@
                         <label asp-for="Input.RememberMe" class="form-check-label">@Html.DisplayNameFor(m => m.Input.RememberMe)</label>
                     </div>
 
-                    <div>
-                        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
-                    </div>
+                    <button id="login-submit" type="submit" class="btn btn-primary w-100 btn-lg mb-3">Log in</button>
 
-                    <div class="mt-3 text-center">
-                        <p>
-                            <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                        </p>
-                        <p>
-                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                        </p>
-                        <p>
-                            <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                        </p>
+                    <div class="text-center mt-3">
+                        <a id="forgot-password" asp-page="./ForgotPassword" class="link-secondary">Forgot your password?</a>
+                    </div>
+                    <div class="text-center mt-2">
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="link-secondary">Register as a new user</a>
+                    </div>
+                    <div class="text-center mt-2">
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="link-secondary">Resend email confirmation</a>
                     </div>
                 </form>
             </section>
@@ -55,3 +51,58 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
+<style>
+    /* Main Header Styling */
+    h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #264653;
+    }
+
+    /* Login Section Styling */
+    .login-section {
+        background-color: #ffffff;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Form Field Styling */
+    .form-floating .form-control {
+        border-radius: 0.25rem;
+        padding: 1rem 0.75rem;
+        height: auto;
+    }
+
+    .form-floating label {
+        padding: 0.5rem 0.75rem;
+        font-size: 1rem;
+        color: #555;
+    }
+
+    /* Button Styling */
+    #login-submit {
+        background-color: #2a9d8f;
+        border: none;
+        font-size: 1.1rem;
+        transition: background-color 0.3s ease;
+    }
+
+    #login-submit:hover {
+        background-color: #21867a;
+    }
+
+    /* Link Styling */
+    .link-secondary {
+        color: #555;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+    }
+
+    .link-secondary:hover {
+        color: #2a9d8f;
+        text-decoration: underline;
+    }
+
+   
+</style>
