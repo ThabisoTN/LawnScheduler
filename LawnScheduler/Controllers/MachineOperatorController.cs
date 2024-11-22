@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Plugins;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,6 +20,8 @@ namespace LawnScheduler.Controllers
             _userManager = userManager;
             _applicationContext = applicationContext; 
         }
+
+
 
 
         //get all bookings 
@@ -59,7 +62,7 @@ namespace LawnScheduler.Controllers
 
         // updating work progress. 
         [HttpPost]
-        public async Task<IActionResult> CompleteBooking(int bookingId)
+        public async Task<IActionResult> CompleteBooking(int bookingId, Machine obj)
         {
             var booking = await _context.Bookings.FindAsync(bookingId);
             if (booking != null && booking.IsConfirmed)
@@ -70,6 +73,43 @@ namespace LawnScheduler.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> RegisterMachine()
+        {
+            return View();
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> RegisterMachine(Machine obj) 
+        {
+            var OperatorUserId = _userManager.GetUserId(User);
+            if (OperatorUserId == null)
+            {
+                throw new Exception("User not recognized");
+            }
+
+
+            var machine = new Machine
+            {
+                OperatorId = OperatorUserId,
+                MachineId = obj.MachineId,
+                Model = obj.Model,
+                Description = obj.Description,
+                MachineName = obj.MachineName,
+
+            };
+
+            _context.Machines.Add(machine);
+            await _context.SaveChangesAsync();
+            Console.WriteLine("Machine added successfull");
+
+            return RedirectToAction("Index", new {Message="Machine added successful!!!"});
+
         }
     }
 }

@@ -2,13 +2,13 @@
 
 <!-- Navigation to All Bookings -->
 <div class="container my-4 text-center">
-    <a class="btn btn-secondary" asp-controller="ConflictManager" asp-action="AllBookings">View All Bookings</a>
+    <a class="btn btn-secondary btn-lg shadow-sm" asp-controller="ConflictManager" asp-action="AllBookings">View All Bookings</a>
 </div>
 
 <h2 class="text-center mb-4">Conflicting Bookings</h2>
 
 <div class="container">
-    <table class="table table-striped table-bordered shadow-sm">
+    <table class="table table-striped table-bordered conflict-table shadow-sm">
         <thead class="thead-dark">
             <tr>
                 <th>Booking ID</th>
@@ -38,7 +38,7 @@
                                     }
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-warning w-100">Resolve Conflict</button>
+                            <button type="submit" class="btn btn-warning btn-sm w-100 resolve-button">Resolve Conflict</button>
                         </form>
                     </td>
                 </tr>
@@ -53,45 +53,72 @@
         font-size: 2rem;
         font-weight: bold;
         color: #264653;
+        margin-bottom: 30px;
     }
 
     /* Table Styling */
-    .table {
+    .conflict-table {
         width: 100%;
         border-radius: 0.5rem;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     }
 
-    .table th {
+    .conflict-table th {
         background-color: #2a9d8f;
         color: white;
         text-align: center;
+        font-size: 1.1rem;
     }
 
-    .table td {
-        vertical-align: middle;
+    .conflict-table td {
         text-align: center;
+        vertical-align: middle;
+        font-size: 1rem;
+        color: #555;
     }
 
-    /* Button Styling */
+    /* Row Hover Effect */
+    .conflict-table tbody tr:hover {
+        background-color: #f1f3f5;
+        transform: scale(1.01);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    /* Form and Button Styling */
+    .form-group label {
+        font-weight: bold;
+        font-size: 0.9rem;
+        color: #555;
+    }
+
     .btn-warning {
-        background-color: #ffc107;
+        background-color: #ffca28;
         border: none;
+        color: white;
+        font-size: 1rem;
+        border-radius: 0.5rem;
         transition: background-color 0.3s ease;
     }
 
     .btn-warning:hover {
-        background-color: #e0a800;
+        background-color: #f8b400;
+        transform: translateY(-2px);
     }
 
     .btn-secondary {
-        color: white;
         background-color: #6c757d;
-        transition: background-color 0.3s ease;
+        color: white;
+        border-radius: 0.5rem;
+        font-size: 1.1rem;
+        padding: 10px 20px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     .btn-secondary:hover {
-        background-color: #5a6268;
+        background-color: #545b62;
+        transform: translateY(-2px);
     }
+
+  
 </style>

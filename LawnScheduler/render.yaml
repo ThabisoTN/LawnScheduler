@@ -1,0 +1,10 @@
+﻿services:
+  - type: web
+    name: LawnSchedulerApp
+    plan: free
+    repo: https://github.com/ThabisoTN/LawnScheduler
+    branch: main
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production

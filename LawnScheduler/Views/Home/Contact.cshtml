@@ -1,0 +1,130 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Contact";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact - @ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #f0f4f8, #dfe6e9);
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .contact-container {
+            margin: 50px auto;
+            padding: 20px 40px;
+            max-width: 900px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            color: #264653;
+            margin-bottom: 20px;
+        }
+
+        .contact-section {
+            margin-bottom: 20px;
+        }
+
+        .contact-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2a9d8f;
+            margin-bottom: 10px;
+        }
+
+        .contact-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .contact-link {
+            color: #2a9d8f;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: #21867a;
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            background-color: #2a9d8f;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #21867a;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container contact-container">
+        <h1 class="contact-title">Contact Me</h1>
+
+        <div class="contact-section">
+            <h2 class="contact-header">Thabiso Ngubane</h2>
+            <p class="contact-text">
+                I am a Junior .NET Developer with expertise in designing, building, and deploying applications.
+                I am passionate about building scalable and high-quality software using frameworks such as
+                ASP.NET Core,MVC, Blazor and Windows Forms.
+            </p>
+        </div>
+
+        <div class="contact-section">
+            <h2 class="contact-header">Contact Details</h2>
+            <p class="contact-text">
+                <strong>Email:</strong> <a href="mailto:thabisongubanee@gmail.com" class="contact-link">thabisongubanee@gmail.com</a><br />
+                <strong>Phone:</strong> +27 76 818 3306<br />
+                <strong>Portfolio:</strong> <a href="https://thabisongubanee.onrender.com" class="contact-link" target="_blank">thabisongubanee.onrender.com</a>
+            </p>
+        </div>
+
+        <div class="contact-section">
+            <h2 class="contact-header">Education</h2>
+            <p class="contact-text">
+                <strong>Advanced Diploma in ICT:</strong> Durban University of Technology<br />
+                Major: Applied Mathematics for Computing and Data Structure (Feb 2024 - Present)<br /><br />
+
+                <strong>Diploma in Application Development:</strong> Durban University of Technology<br />
+                Major: Application Development and Information Systems (Feb 2020 - May 2023, Cum Laude)
+            </p>
+        </div>
+
+       @*  <div class="contact-section">
+            <h2 class="contact-header">Key Projects</h2>
+            <ul class="contact-text">
+                <li>
+                    <strong>Career Guidance</strong> -
+                    <a href="https://godigicareer.azurewebsites.net" class="contact-link" target="_blank">godigicareer.azurewebsites.net</a><br />
+                    Developed a web application using .NET Core MVC, SQL, and OpenAI to analyze student marks and recommend career paths.
+                </li>
+                <li>
+                    <strong>Chatbot</strong> -
+                    <a href="https://dutchbot-with-pytorch.onrender.com" class="contact-link" target="_blank">dutchbot-with-pytorch.onrender.com</a><br />
+                    Designed a chatbot using Python, Flask, and PyTorch to assist users. Deployed on Render.
+                </li>
+            </ul>
+        </div> *@
+    </div>
+</body>
+</html>

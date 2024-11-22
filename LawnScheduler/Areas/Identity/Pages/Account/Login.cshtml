@@ -2,107 +2,130 @@
 @model LoginModel
 
 @{
+    Layout = null;
     ViewData["Title"] = "Log in";
 }
 
-<h1 class="text-center mt-4">@ViewData["Title"]</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Page Styling */
+        body {
+            background: linear-gradient(to bottom right, #2a9d8f, #264653);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-4">
-            <section class="border p-4 rounded shadow login-section">
-                <form id="account" method="post">
-                    <div asp-validation-summary="ModelOnly" class="text-danger text-center mb-3" role="alert"></div>
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-align: center;
+        }
 
-                    <div class="form-floating mb-3">
-                        <input asp-for="Input.Email" class="form-control" autocomplete="username" placeholder="name@example.com" required />
-                        <label asp-for="Input.Email" class="form-label">Email</label>
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
-                    </div>
+        /* Login Section */
+        .login-section {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
 
-                    <div class="form-floating mb-3">
-                        <input asp-for="Input.Password" type="password" class="form-control" autocomplete="current-password" placeholder="password" required />
-                        <label asp-for="Input.Password" class="form-label">Password</label>
-                        <span asp-validation-for="Input.Password" class="text-danger"></span>
-                    </div>
+        .form-floating .form-control {
+            border-radius: 0.25rem;
+            padding: 1rem;
+            height: auto;
+        }
 
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" asp-for="Input.RememberMe" />
-                        <label asp-for="Input.RememberMe" class="form-check-label">@Html.DisplayNameFor(m => m.Input.RememberMe)</label>
-                    </div>
+        .form-floating label {
+            font-size: 0.9rem;
+            color: #555;
+        }
 
-                    <button id="login-submit" type="submit" class="btn btn-primary w-100 btn-lg mb-3">Log in</button>
+        .form-check-label {
+            font-size: 0.9rem;
+        }
 
-                    <div class="text-center mt-3">
-                        <a id="forgot-password" asp-page="./ForgotPassword" class="link-secondary">Forgot your password?</a>
-                    </div>
-                    <div class="text-center mt-2">
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="link-secondary">Register as a new user</a>
-                    </div>
-                    <div class="text-center mt-2">
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="link-secondary">Resend email confirmation</a>
-                    </div>
-                </form>
-            </section>
-        </div>
+        /* Buttons */
+        #login-submit {
+            background-color: #2a9d8f;
+            color: #fff;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            transition: background-color 0.3s ease;
+        }
+
+        #login-submit:hover {
+            background-color: #21867a;
+        }
+
+        /* Links */
+        .link-secondary {
+            color: #555;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .link-secondary:hover {
+            color: #2a9d8f;
+            text-decoration: underline;
+        }
+
+       
+    </style>
+</head>
+<body>
+    <div class="login-section">
+        <h1>@ViewData["Title"]</h1>
+        <form id="account" method="post" class="mt-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger text-center mb-3" role="alert"></div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" placeholder="Email" required />
+                <label asp-for="Input.Email">Email</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Password" type="password" class="form-control" autocomplete="current-password" placeholder="password" required />
+                <label asp-for="Input.Password">Password</label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-check mb-3">
+                <input class="form-check-input" asp-for="Input.RememberMe" />
+                <label asp-for="Input.RememberMe" class="form-check-label">Remember me</label>
+            </div>
+
+            <button id="login-submit" type="submit" class="btn btn-primary w-100 mb-3">Log in</button>
+
+            <div class="text-center">
+                <a id="forgot-password" asp-page="./ForgotPassword" class="link-secondary">Forgot your password?</a>
+            </div>
+            <div class="text-center mt-2">
+                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="link-secondary">Register as a new user</a>
+            </div>
+            <div class="text-center mt-2">
+                <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="link-secondary">Resend email confirmation</a>
+            </div>
+        </form>
     </div>
-</div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
-
-<style>
-    /* Main Header Styling */
-    h1 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: #264653;
-    }
-
-    /* Login Section Styling */
-    .login-section {
-        background-color: #ffffff;
-        border-radius: 0.5rem;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    }
-
-    /* Form Field Styling */
-    .form-floating .form-control {
-        border-radius: 0.25rem;
-        padding: 1rem 0.75rem;
-        height: auto;
-    }
-
-    .form-floating label {
-        padding: 0.5rem 0.75rem;
-        font-size: 1rem;
-        color: #555;
-    }
-
-    /* Button Styling */
-    #login-submit {
-        background-color: #2a9d8f;
-        border: none;
-        font-size: 1.1rem;
-        transition: background-color 0.3s ease;
-    }
-
-    #login-submit:hover {
-        background-color: #21867a;
-    }
-
-    /* Link Styling */
-    .link-secondary {
-        color: #555;
-        font-size: 0.9rem;
-        transition: color 0.3s ease;
-    }
-
-    .link-secondary:hover {
-        color: #2a9d8f;
-        text-decoration: underline;
-    }
-
-   
-</style>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

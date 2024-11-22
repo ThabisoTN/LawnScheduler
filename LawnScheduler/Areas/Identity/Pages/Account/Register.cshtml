@@ -1,104 +1,134 @@
 ﻿@page
 @model RegisterModel
 @{
+    Layout = null;
     ViewData["Title"] = "Register";
 }
 
-<h1 class="text-center mt-4">@ViewData["Title"]</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Background Styling */
+        body {
+            background: linear-gradient(to bottom right, #2a9d8f, #264653);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-5">
-            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="border p-4 rounded shadow register-section">
+        /* Header Styling */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Register Section Styling */
+        .register-section {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* Form Fields */
+        .form-floating .form-control,
+        .form-floating .form-select {
+            border-radius: 0.25rem;
+            padding: 1rem 0.75rem;
+            height: auto;
+        }
+
+        .form-floating label {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* Button Styling */
+        #registerSubmit {
+            background-color: #2a9d8f;
+            color: #fff;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            transition: background-color 0.3s ease;
+        }
+
+        #registerSubmit:hover {
+            background-color: #21867a;
+        }
+
+        /* Login Link Styling */
+        .login-link {
+            color: #2a9d8f;
+            font-size: 0.9rem;
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            text-decoration: none;
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+       
+    </style>
+</head>
+<body>
+    <div>
+        <h1>@ViewData["Title"]</h1>
+        <div class="register-section">
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                 <h2 class="text-center mb-4">Create a New Account</h2>
                 <div asp-validation-summary="ModelOnly" class="text-danger text-center mb-3" role="alert"></div>
 
                 <div class="form-floating mb-3">
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Email" required />
                     <label asp-for="Input.Email">Email</label>
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input asp-for="Input.Password" type="password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                    <input asp-for="Input.Password" type="password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" required />
                     <label asp-for="Input.Password">Password</label>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input asp-for="Input.ConfirmPassword" type="password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                    <input asp-for="Input.ConfirmPassword" type="password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="confirm password" required />
                     <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                     <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                 </div>
 
+                <div class="form-floating mb-3">
+                    <select asp-for="Input.Role" class="form-select" aria-required="true" required>
+                        <option value="">Select Role</option>
+                        <option value="Customer">Customer</option>
+                        <option value="Machine Operator">Machine Operator</option>
+                    </select>
+                    <label asp-for="Input.Role">Role</label>
+                    <span asp-validation-for="Input.Role" class="text-danger"></span>
+                </div>
+
                 <button id="registerSubmit" type="submit" class="btn btn-primary w-100 btn-lg">Register</button>
             </form>
-        </div>
-        <div class="col-md-8 col-lg-6 mt-5 mt-md-0">
-            <section class="info-section text-center">
-                <h3>All users registering will be registered as customers.</h3>
-                <hr />
-                <p>If you have any questions, please contact support.</p>
-            </section>
+            <a href="/Identity/Account/Login" class="login-link">Already have an account? Log in here.</a>
         </div>
     </div>
-</div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
-
-<style>
-    /* Main Header Styling */
-    h1 {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #264653;
-    }
-
-    /* Register Section Styling */
-    .register-section {
-        background-color: #ffffff;
-        border-radius: 0.5rem;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    }
-
-    /* Form Field Styling */
-    .form-floating .form-control {
-        border-radius: 0.25rem;
-        padding: 1rem 0.75rem;
-        height: auto;
-    }
-
-    .form-floating label {
-        padding: 0.5rem 0.75rem;
-        font-size: 1rem;
-        color: #555;
-    }
-
-    /* Button Styling */
-    #registerSubmit {
-        background-color: #2a9d8f;
-        border: none;
-        font-size: 1.1rem;
-        transition: background-color 0.3s ease;
-    }
-
-    #registerSubmit:hover {
-        background-color: #21867a;
-    }
-
-    /* Info Section Styling */
-    .info-section h3 {
-        font-size: 1.25rem;
-        font-weight: bold;
-        color: #333;
-    }
-
-    .info-section hr {
-        width: 50%;
-        margin: 0.5rem auto;
-    }
-
-  
-</style>
+</body>
+</html>

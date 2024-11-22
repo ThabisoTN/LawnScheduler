@@ -10,7 +10,7 @@
                 <th>Machine Name</th>
                 <th>Scheduled Date</th>
                 <th>Status</th>
-                <th>Email of Operator You Booked</th>
+                <th>Email of Operator</th>
             </tr>
         </thead>
         <tbody>
@@ -31,7 +31,7 @@
 <style>
     /* Header Style */
     h2 {
-        margin-bottom: 20px;
+        margin: 20px 0;
         font-size: 2rem;
         font-weight: bold;
         text-align: center;
@@ -44,24 +44,25 @@
         margin-top: 20px;
         border-radius: 0.5rem;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     }
 
-    .booking-table th,
-    .booking-table td {
-        padding: 15px;
-        text-align: left;
-        border: 1px solid #dee2e6;
-    }
-
-    /* Header Row */
     .booking-table th {
         background-color: #2a9d8f;
         color: #fff;
         font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
     }
 
-    /* Table Row Styling */
+    .booking-table td {
+        padding: 15px;
+        text-align: center;
+        font-size: 1rem;
+        color: #555;
+    }
+
+    /* Alternate Row Colors */
     .booking-table tbody tr:nth-of-type(odd) {
         background-color: #f8f9fa;
     }
@@ -70,11 +71,18 @@
         background-color: #ffffff;
     }
 
+    /* Row Hover Effect */
     .booking-table tbody tr:hover {
         background-color: #e9ecef;
+        transform: scale(1.01);
         cursor: pointer;
+        transition: transform 0.2s ease-in-out;
     }
 
-   
-    
+    /* Table Borders */
+    .booking-table,
+    .booking-table th,
+    .booking-table td {
+        border: 1px solid #dee2e6;
+    }
 </style>

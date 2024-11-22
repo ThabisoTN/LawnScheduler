@@ -1,114 +1,148 @@
 ﻿@model IEnumerable<LawnScheduler.Data.Machine>
 
-<!-- Navigation List Item for My Bookings -->
-<ul class="nav justify-content-center mb-4 nav-bar-custom">
-    <li class="nav-item">
-        <a class="nav-link my-bookings" asp-controller="Customer" asp-action="MyBookings">
-            My Bookings
-        </a>
-    </li>
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Machines</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* General Styles */
+        body {
+            background: linear-gradient(to bottom right, #f0f4f8, #dfe6e9);
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
 
-<h2 class="text-center mb-4">Available Machines</h2>
+        h2 {
+            color: #264653;
+            font-weight: bold;
+            margin-top: 20px;
+        }
 
-<div class="container">
-    <div class="row">
-        @foreach (var machine in Model)
-        {
-            <div class="col-md-6 col-lg-4 mb-4 d-flex align-items-stretch">
-                <div class="card machine-card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">@machine.MachineName</h5>
-                        <p class="card-text">@machine.Description</p>
-                        <form asp-action="BookMachine" method="post">
-                            <input type="hidden" name="machineId" value="@machine.MachineId" />
-                            <div class="form-group">
-                                <label for="scheduledDate">Booking Date:</label>
-                                <input type="date" name="scheduledDate" class="form-control" required />
-                            </div>
-                            <button type="submit" class="btn btn-primary book-button w-100">Book Now</button>
-                        </form>
+        /* Navbar Styles */
+        .nav-bar-custom {
+            background-color: #264653;
+            padding: 15px 0;
+            border-radius: 0.5rem;
+            margin-bottom: 20px;
+        }
+
+        .nav-link.my-bookings {
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 10px 15px;
+            border-radius: 0.5rem;
+            transition: color 0.3s, background-color 0.3s;
+        }
+
+            .nav-link.my-bookings:hover {
+                background-color: #2a9d8f;
+                color: #fff;
+            }
+
+        /* Card Styles */
+        .machine-card {
+            border: none;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
+            background-color: #fff;
+        }
+
+            .machine-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #264653;
+            font-weight: bold;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Form and Button Styles */
+        .form-group label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .btn-primary {
+            background-color: #2a9d8f;
+            border-color: #2a9d8f;
+            color: white;
+            font-size: 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #21867a;
+                border-color: #21867a;
+                transform: translateY(-2px);
+            }
+
+        /* Footer Styles */
+        footer {
+            margin-top: 20px;
+            background-color: #264653;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <ul class="nav justify-content-center nav-bar-custom">
+        <li class="nav-item">
+            <a class="nav-link my-bookings" asp-controller="Customer" asp-action="MyBookings">My Bookings</a>
+        </li>
+    </ul>
+
+    <!-- Header -->
+    <h2 class="text-center mb-4">Available Machines</h2>
+
+    <!-- Machine Cards -->
+    <div class="container">
+        <div class="row">
+            @foreach (var machine in Model)
+            {
+                <div class="col-md-6 col-lg-4 mb-4 d-flex align-items-stretch">
+                    <div class="card machine-card">
+                        <div class="card-body">
+                            <h5 class="card-title">@machine.MachineName</h5>
+                            <p class="card-text">@machine.Description</p>
+                            <form asp-action="BookMachine" method="post">
+                                <input type="hidden" name="machineId" value="@machine.MachineId" />
+                                <div class="form-group">
+                                    <label for="scheduledDate">Booking Date:</label>
+                                    <input type="date" name="scheduledDate" class="form-control" required />
+                                </div>
+                                <button type="submit" class="btn btn-primary book-button w-100">Book Now</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
-</div>
 
-<style>
-    /* General Styles */
-    body {
-        background-color: #f8f9fa;
-    }
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 GreenOps. Developed by Thabiso Ngubane. All rights reserved.</p>
+    </footer>
 
-    h2 {
-        color: #264653;
-    }
-
-    /* Navbar Styles */
-    .nav-bar-custom {
-        background-color: #e9ecef;
-        padding: 15px 0;
-        border-radius: 0.5rem;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .nav-link.my-bookings {
-        color: #007bff;
-        font-weight: bold;
-        font-size: 1.1rem;
-        padding: 10px 15px;
-        border-radius: 0.5rem;
-        background-color: #e2e6ea;
-        transition: color 0.3s, background-color 0.3s;
-    }
-
-    .nav-link.my-bookings:hover {
-        color: #0056b3;
-        background-color: #d1d8de;
-    }
-
-    /* Card Styles */
-    .machine-card {
-        border: none;
-        border-radius: 0.5rem;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        transition: transform 0.2s ease-in-out;
-    }
-
-    .machine-card:hover {
-        transform: translateY(-5px);
-    }
-
-    .card-title {
-        font-size: 1.5rem;
-        color: #007bff;
-    }
-
-    .card-text {
-        font-size: 1rem;
-        color: #555;
-        margin-bottom: 15px;
-    }
-
-    /* Form and Button Styles */
-    .form-group label {
-        font-weight: bold;
-        color: #555;
-    }
-
-    .btn-primary {
-        background-color: #2a9d8f;
-        border-color: #2a9d8f;
-        color: white;
-        font-size: 1rem;
-        border-radius: 0.5rem;
-        transition: background-color 0.3s ease;
-    }
-
-    .btn-primary:hover {
-        background-color: #21867a;
-        border-color: #21867a;
-    }
-    }
-</style>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

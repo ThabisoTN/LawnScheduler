@@ -1,116 +1,102 @@
-﻿@model IEnumerable<LawnScheduler.Data.Machine>
-@{
-    ViewData["Title"] = "Home Page";
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenOps - Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        /* Custom styles */
         body {
-            background-color: #f8f9fa;
-            color: #333;
-        }
-        h1.display-4 {
-            font-weight: 700;
-            color: #2a9d8f;
-        }
-        .lead {
-            color: #555;
-        }
-        .card {
-            border: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease-in-out;
-        }
-        .card:hover {
-            transform: translateY(-10px);
-        }
-        .card-title {
-            color: #264653;
-            font-weight: 600;
-        }
-        .card-text {
-            color: #555;
-        }
-        .book-button {
-            background-color: #2a9d8f;
-            border: none;
-            transition: background-color 0.3s ease;
-        }
-        .book-button:hover {
-            background-color: #21867a;
-        }
-        footer {
-            background-color: #264653;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(to bottom right, #2a9d8f, #264653);
             color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-custom {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.25rem;
+            color: #fff;
+            text-decoration: none;
+            border: 2px solid #fff;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+            .btn-custom:hover {
+                background-color: #fff;
+                color: #264653;
+                text-decoration: none;
+            }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-align: center;
             padding: 1rem 0;
         }
-        footer p {
-            margin: 0;
-        }
+
+            footer a {
+                color: #2a9d8f;
+                text-decoration: none;
+            }
+
+                footer a:hover {
+                    text-decoration: underline;
+                }
     </style>
 </head>
 <body>
-    <!-- Header Section -->
-    <div class="container text-center mt-5">
-        <h1 class="display-4">Welcome to LawnScheduler</h1>
-        <p class="lead">Manage your machine bookings effortlessly.</p>
-    </div>
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <h1>Welcome to GreenOps</h1>
+        <p>Your all-in-one solution for machine management and bookings.</p>
+        <div>
+            <a href="/Identity/Account/Login" class="btn btn-custom mr-3">Log In</a>
+            <a href="/Identity/Account/Register" class="btn btn-custom">Register</a>
+        </div>
+        <div class="mt-4">
+            <h3>Contact the Developer</h3>
+            <p>Developed by Thabiso Ngubane.</p>
+            <p>Email: <a href="mailto:thabisongubanee@gmail.com">thabisongubanee@gmail.com</a></p>
+            <p>Phone: +27 76 818 3306</p>
+            <p>
 
-    <!-- Available Machines Section -->
-    <div class="container mt-5">
-        <h2 class="text-center mb-4">Available Machines for Booking</h2>
-        <div class="row">
-            @foreach (var machine in Model)
-            {
-                <div class="col-md-6 col-lg-4 mb-4 d-flex align-items-stretch">
-                    <div class="card w-100">
-                        <div class="card-body">
-                            <h5 class="card-title">@machine.MachineName</h5>
-                            <p class="card-text">@machine.Description</p>
-                            <label>Booking Date:</label>
-                            <input type="date" class="form-control mb-3" placeholder="yyyy-mm-dd" />
-                            <button class="btn btn-primary book-button w-100" data-toggle="modal" data-target="#loginModal">Book Now</button>
-                        </div>
-                    </div>
-                </div>
-            }
+                <a asp-area="" asp-controller="Home" asp-action="Contact">View More Details About Thabiso Ngubane</a>
+
+            </p>
         </div>
     </div>
 
-    <!-- Login Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel">Login Required</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body text-center">
-                    <p class="mb-4">Please log in to book a machine.</p>
-                    <a href="https://localhost:7142/Identity/Account/Login" class="btn btn-primary">Login</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer Section -->
-    <footer class="text-center mt-5">
-        <div class="container">
-            <p>&copy; 2024 LawnScheduler. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   @*  <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 GreenOps. Developed by <strong>Thabiso</strong>. <a href="#contactSection">Contact Me</a></p>
+    </footer> *@
 </body>
 </html>
