@@ -23,7 +23,7 @@ public partial class Booking
 
     public DateTime? CompletionDate { get; set; }
 
-    public string Status { get; set; } = "Waiting For Acknowledgement";
+    public string Status { get; set; } = null!;
 
     public virtual Machine Machine { get; set; } = null!;
 }

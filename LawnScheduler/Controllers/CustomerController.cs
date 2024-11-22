@@ -1,4 +1,4 @@
-﻿using LawnScheduler.Data; // Make sure this contains the ApplicationUser
+﻿using LawnScheduler.Data; 
 using LawnScheduler.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;

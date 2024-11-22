@@ -48,12 +48,10 @@ namespace LawnScheduler
 
                     await DbInitializer.SeedRoles(services);
                     await DbInitializer.SeedUsers(services);
-
-                    // Migrate and seed CustomDbContext (for Machines)
                     var customContext = services.GetRequiredService<CustomDbContext>();
                     customContext.Database.Migrate();
 
-                    await DbInitializer.SeedMachines(services);  // For Machines
+                    await DbInitializer.SeedMachines(services);
                 }
                 catch (Exception ex)
                 {

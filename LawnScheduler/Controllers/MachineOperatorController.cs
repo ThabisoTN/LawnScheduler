@@ -12,7 +12,8 @@ namespace LawnScheduler.Controllers
     {
         private readonly CustomDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly ApplicationDbContext _applicationContext; 
+        private readonly ApplicationDbContext _applicationContext;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public MachineOperatorController(CustomDbContext context, UserManager<IdentityUser> userManager, ApplicationDbContext applicationContext) // Update constructor
         {
@@ -36,6 +37,8 @@ namespace LawnScheduler.Controllers
 
             return View(bookings);
         }
+
+
 
 
 
