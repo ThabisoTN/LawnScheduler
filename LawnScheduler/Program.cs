@@ -11,43 +11,47 @@ namespace LawnScheduler
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Connection string
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-            // Register ApplicationDbContext for Identity
+            // Add DbContexts
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
-
-            // Register CustomDbContext for Machines table
             builder.Services.AddDbContext<CustomDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
+            // Configure Identity
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = true;
+            })
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            // Developer exception page for database issues
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();  // For Identity
-
-            builder.Services.AddControllersWithViews();
-
-            // Register BookingService
+            // Add Booking Service
             builder.Services.AddScoped<IBookingService, BookingService>();
+
+            // Add Controllers with Views
+            builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
 
-            // Seed roles, users, and machines
+            // Seed Data
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 try
                 {
-                    // Migrate and seed ApplicationDbContext (for Identity)
                     var context = services.GetRequiredService<ApplicationDbContext>();
                     context.Database.Migrate();
 
                     await DbInitializer.SeedRoles(services);
                     await DbInitializer.SeedUsers(services);
+
                     var customContext = services.GetRequiredService<CustomDbContext>();
                     customContext.Database.Migrate();
 
@@ -60,7 +64,7 @@ namespace LawnScheduler
                 }
             }
 
-            // Configure the HTTP request pipeline.
+            // Configure the HTTP request pipeline
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
@@ -73,9 +77,8 @@ namespace LawnScheduler
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

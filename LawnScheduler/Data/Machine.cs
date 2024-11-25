@@ -15,7 +15,7 @@ public partial class Machine
     public string Description { get; set; } = null!;
 
     public string OperatorId { get; set; } = null!;
-    public IdentityUser IdentityUser { get; set; }
+    public ApplicationUser ApplicationUser { get; set; }
 
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 }

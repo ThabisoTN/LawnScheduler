@@ -13,10 +13,10 @@ namespace LawnScheduler.Controllers
     {
         private readonly CustomDbContext _context;
         private readonly IBookingService _bookingService;
-        private readonly UserManager<IdentityUser> _userManager; 
+        private readonly UserManager<ApplicationUser> _userManager; 
 
 
-        public CustomerController(CustomDbContext context, IBookingService bookingService, UserManager<IdentityUser> userManager)
+        public CustomerController(CustomDbContext context, IBookingService bookingService, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _bookingService = bookingService;
@@ -66,16 +66,33 @@ namespace LawnScheduler.Controllers
         public async Task<IActionResult> MyBookings()
         {
             var userId = _userManager.GetUserId(User);
+
+            // Fetch bookings and include related machine data
             var bookings = await _context.Bookings
                 .Include(b => b.Machine)
-                .Where(b => b.CustomerId == userId).ToListAsync();
-            var operatorIds = bookings.Select(b => b.Machine.OperatorId).Distinct().ToList();
-            var operators = await _userManager.Users.Where(u => operatorIds.Contains(u.Id)).ToDictionaryAsync(u => u.Id, u => u.Email);
+                .Where(b => b.CustomerId == userId)
+                .ToListAsync();
 
-            ViewBag.OperatorEmails = operators; 
+            // Get distinct operator IDs from bookings
+            var operatorIds = bookings
+                .Select(b => b.Machine.OperatorId)
+                .Distinct()
+                .ToList();
+
+            // Fetch operators' names and store them in a dictionary
+            var operators = await _userManager.Users
+                .Where(u => operatorIds.Contains(u.Id))
+                .ToDictionaryAsync(
+                    u => u.Id,
+                    u => $"{u.FirstName} {u.LastName}"
+                );
+
+            // Pass operator names to the view using ViewBag
+            ViewBag.OperatorNames = operators;
 
             return View(bookings);
         }
+
 
     }
 }

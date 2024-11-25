@@ -15,7 +15,7 @@ public partial class CustomDbContext : DbContext
         : base(options)
     {
     }
-
+   
     public virtual DbSet<Booking> Bookings { get; set; }
 
     public virtual DbSet<Machine> Machines { get; set; }

@@ -11,11 +11,11 @@ namespace LawnScheduler.Controllers
     public class MachineOperatorController : Controller
     {
         private readonly CustomDbContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _applicationContext;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public MachineOperatorController(CustomDbContext context, UserManager<IdentityUser> userManager, ApplicationDbContext applicationContext) // Update constructor
+        public MachineOperatorController(CustomDbContext context, UserManager<ApplicationUser> userManager, ApplicationDbContext applicationContext) // Update constructor
         {
             _context = context;
             _userManager = userManager;

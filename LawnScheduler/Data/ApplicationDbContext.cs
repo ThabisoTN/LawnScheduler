@@ -10,6 +10,8 @@ namespace LawnScheduler.Data
             : base(options)
         {
         }
+
+        public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 
 }

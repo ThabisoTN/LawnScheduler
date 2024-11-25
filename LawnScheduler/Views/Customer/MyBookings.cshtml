@@ -6,25 +6,25 @@
     <table class="table table-striped table-bordered booking-table">
         <thead>
             <tr>
-                <th>Booking ID</th>
                 <th>Machine Name</th>
                 <th>Scheduled Date</th>
                 <th>Status</th>
-                <th>Email of Operator</th>
+                <th>Operator Name</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var booking in Model)
             {
                 <tr>
-                    <td>@booking.BookingId</td>
+                    
                     <td>@booking.Machine.MachineName</td>
                     <td>@booking.ScheduledDate.ToShortDateString()</td>
                     <td>@booking.Status</td>
-                    <td>@ViewBag.OperatorEmails[booking.Machine.OperatorId]</td>
+                    <td>@ViewBag.OperatorNames[booking.Machine.OperatorId]</td>
                 </tr>
             }
         </tbody>
+
     </table>
 </div>
 
