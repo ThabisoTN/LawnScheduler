@@ -67,19 +67,18 @@ namespace LawnScheduler.Controllers
         {
             var userId = _userManager.GetUserId(User);
 
-            // Fetch bookings and include related machine data
+         
             var bookings = await _context.Bookings
                 .Include(b => b.Machine)
                 .Where(b => b.CustomerId == userId)
                 .ToListAsync();
 
-            // Get distinct operator IDs from bookings
+            
             var operatorIds = bookings
                 .Select(b => b.Machine.OperatorId)
                 .Distinct()
                 .ToList();
 
-            // Fetch operators' names and store them in a dictionary
             var operators = await _userManager.Users
                 .Where(u => operatorIds.Contains(u.Id))
                 .ToDictionaryAsync(
@@ -87,7 +86,7 @@ namespace LawnScheduler.Controllers
                     u => $"{u.FirstName} {u.LastName}"
                 );
 
-            // Pass operator names to the view using ViewBag
+          
             ViewBag.OperatorNames = operators;
 
             return View(bookings);
